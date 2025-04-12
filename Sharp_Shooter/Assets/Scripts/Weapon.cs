@@ -17,6 +17,9 @@ public class Weapon : MonoBehaviour
     [SerializeField]
     Animator animator;
 
+    [SerializeField]
+    GameObject hitVFXPrefab;
+
     //RaycastHit interacts with rigidbodys and colliders
     RaycastHit hit;
     const string SHOOT_STRING = "Shoot";
@@ -55,6 +58,9 @@ public class Weapon : MonoBehaviour
 
             EnemyHealth enemyHealth = hit.transform.GetComponent<EnemyHealth>();
             enemyHealth?.TakeDamage(damageAmount); //Enemy health null? (same as below)
+
+
+            GameObject hitVFX = Instantiate(hitVFXPrefab, hit.point, Quaternion.identity); //hit.point will return the location the ray hit the collider 
 
             /*
             if (hit.transform.TryGetComponent<EnemyHealth>(out EnemyHealth enemyHealth))
