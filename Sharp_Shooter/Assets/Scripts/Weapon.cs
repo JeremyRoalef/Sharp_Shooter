@@ -8,6 +8,13 @@ public class Weapon : MonoBehaviour
     [SerializeField]
     float maxRayDistance;
 
+    [SerializeField]
+    int damageAmount = 1;
+
+    //RaycastHit interacts with rigidbodys and colliders
+    RaycastHit hit;
+
+
     private void Awake()
     {
         starterAssetsInputs = GetComponentInParent<StarterAssetsInputs>();
@@ -23,18 +30,32 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (starterAssetsInputs.shoot)
+        HandleShoot();
+    }
+
+    private void HandleShoot()
+    {
+        //Conditions to stop
+        if (!starterAssetsInputs.shoot) { return; }
+
+
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
         {
-            //RaycastHit interacts with rigidbodys and colliders
-            RaycastHit hit;
+            //If hit has output, this will run
+            Debug.Log(hit.collider.name);
 
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
+            EnemyHealth enemyHealth = hit.transform.GetComponent<EnemyHealth>();
+            enemyHealth?.TakeDamage(damageAmount); //Enemy health null? (same as below)
+
+            /*
+            if (hit.transform.TryGetComponent<EnemyHealth>(out EnemyHealth enemyHealth))
             {
-                //If hit has output, this will run
-                Debug.Log(hit.collider.name);
+                Debug.Log("Hit enemy");
+                enemyHealth.TakeDamage(damageAmount);
             }
-
-            starterAssetsInputs.ShootInput(false);
+            */
         }
+
+        starterAssetsInputs.ShootInput(false);
     }
 }
