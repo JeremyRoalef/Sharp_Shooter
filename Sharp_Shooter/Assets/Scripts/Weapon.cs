@@ -11,6 +11,9 @@ public class Weapon : MonoBehaviour
     [SerializeField]
     int damageAmount = 1;
 
+    [SerializeField]
+    ParticleSystem muzzleFlash;
+
     //RaycastHit interacts with rigidbodys and colliders
     RaycastHit hit;
 
@@ -38,6 +41,7 @@ public class Weapon : MonoBehaviour
         //Conditions to stop
         if (!starterAssetsInputs.shoot) { return; }
 
+        muzzleFlash.Play();
 
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
         {
