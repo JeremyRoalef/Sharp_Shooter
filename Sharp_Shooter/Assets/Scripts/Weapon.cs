@@ -14,9 +14,12 @@ public class Weapon : MonoBehaviour
     [SerializeField]
     ParticleSystem muzzleFlash;
 
+    [SerializeField]
+    Animator animator;
+
     //RaycastHit interacts with rigidbodys and colliders
     RaycastHit hit;
-
+    const string SHOOT_STRING = "Shoot";
 
     private void Awake()
     {
@@ -42,6 +45,8 @@ public class Weapon : MonoBehaviour
         if (!starterAssetsInputs.shoot) { return; }
 
         muzzleFlash.Play();
+        //Play the shoot animation, passing the layer and normalized time (0 for each)
+        animator.Play(SHOOT_STRING, 0, 0f);
 
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
         {
