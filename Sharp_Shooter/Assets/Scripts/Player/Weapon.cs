@@ -30,7 +30,7 @@ public class Weapon : MonoBehaviour
             //If hit has output, this will run
             Debug.Log(hit.collider.name);
 
-            EnemyHealth enemyHealth = hit.transform.GetComponent<EnemyHealth>();
+            EnemyHealth enemyHealth = hit.transform.GetComponentInParent<EnemyHealth>();
             enemyHealth?.TakeDamage(weaponSO.Damage); //Enemy health null? (same as below)
 
             GameObject hitVFX = Instantiate(weaponSO.hitVFXPrefab, hit.point, Quaternion.identity); //hit.point will return the location the ray hit the collider 
