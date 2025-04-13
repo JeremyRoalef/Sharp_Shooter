@@ -5,6 +5,9 @@ public class Weapon : MonoBehaviour
     [SerializeField]
     ParticleSystem muzzleFlash;
 
+    [SerializeField]
+    LayerMask interactionLayers;
+
     //RaycastHit interacts with rigidbodys and colliders
     RaycastHit hit;
 
@@ -12,7 +15,9 @@ public class Weapon : MonoBehaviour
     {
         muzzleFlash.Play();
 
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
+        //Last argument ignores triggers
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, 
+            out hit, Mathf.Infinity, interactionLayers, QueryTriggerInteraction.Ignore))
         {
             //If hit has output, this will run
             Debug.Log(hit.collider.name);
