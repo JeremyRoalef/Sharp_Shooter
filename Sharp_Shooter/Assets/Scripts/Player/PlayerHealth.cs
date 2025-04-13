@@ -20,6 +20,9 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]
     Image[] shieldBars;
 
+    [SerializeField]
+    GameObject gameOverContainer;
+
     int gameOverVirtualCameraPriority = 20;
 
     private void Awake()
@@ -59,6 +62,9 @@ public class PlayerHealth : MonoBehaviour
     {
         weaponCamera.parent = null;
         deathVirtualCamera.Priority = gameOverVirtualCameraPriority;
+        gameOverContainer.SetActive(true);
+
+
         Destroy(gameObject);
     }
 }
