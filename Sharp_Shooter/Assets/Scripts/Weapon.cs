@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    [SerializeField]
+    WeaponSO weaponSO;
+
     StarterAssetsInputs starterAssetsInputs;
 
     [SerializeField]
     float maxRayDistance;
-
-    [SerializeField]
-    int damageAmount = 1;
 
     [SerializeField]
     ParticleSystem muzzleFlash;
@@ -57,7 +57,7 @@ public class Weapon : MonoBehaviour
             Debug.Log(hit.collider.name);
 
             EnemyHealth enemyHealth = hit.transform.GetComponent<EnemyHealth>();
-            enemyHealth?.TakeDamage(damageAmount); //Enemy health null? (same as below)
+            enemyHealth?.TakeDamage(weaponSO.Damage); //Enemy health null? (same as below)
 
 
             GameObject hitVFX = Instantiate(hitVFXPrefab, hit.point, Quaternion.identity); //hit.point will return the location the ray hit the collider 
