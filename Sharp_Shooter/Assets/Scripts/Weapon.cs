@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -10,10 +11,17 @@ public class Weapon : MonoBehaviour
 
     //RaycastHit interacts with rigidbodys and colliders
     RaycastHit hit;
+    CinemachineImpulseSource impulseSource;
+
+    private void Awake()
+    {
+        impulseSource = GetComponent<CinemachineImpulseSource>();
+    }
 
     public void Shoot(WeaponSO weaponSO)
     {
         muzzleFlash.Play();
+        impulseSource.GenerateImpulse();
 
         //Last argument ignores triggers
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, 

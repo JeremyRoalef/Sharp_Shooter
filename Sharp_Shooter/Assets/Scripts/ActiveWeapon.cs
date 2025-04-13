@@ -13,6 +13,9 @@ public class ActiveWeapon : MonoBehaviour
     CinemachineVirtualCamera playerFollowCamera;
 
     [SerializeField]
+    Camera weaponCamera; 
+
+    [SerializeField]
     GameObject zoomVignette;
 
     StarterAssetsInputs starterAssetsInputs;
@@ -76,6 +79,7 @@ public class ActiveWeapon : MonoBehaviour
         Invoke("EnableShooting", currentWeaponSO.FireRate);
         AdjustAmmo(-1);
         currentWeapon.Shoot(currentWeaponSO);
+
         //Play the shoot animation, passing the layer and normalized time (0 for each)
         animator.Play(SHOOT_STRING, 0, 0f);
 
@@ -114,12 +118,14 @@ public class ActiveWeapon : MonoBehaviour
         if (starterAssetsInputs.zoom)
         {
             playerFollowCamera.m_Lens.FieldOfView = currentWeaponSO.ZoomAmount;
+            weaponCamera.fieldOfView = currentWeaponSO.ZoomAmount;
             zoomVignette.SetActive(true);
             firstPersonController.ChangeRotationSpeed(currentWeaponSO.ZoomRotateAmount);
         }
         else
         {
             playerFollowCamera.m_Lens.FieldOfView = cameraDefaultZoom;
+            weaponCamera.fieldOfView = cameraDefaultZoom;
             zoomVignette.SetActive(false);
             firstPersonController.ChangeRotationSpeed(defaultRotationAmount);
         }
