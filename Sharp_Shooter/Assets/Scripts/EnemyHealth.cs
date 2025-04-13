@@ -8,6 +8,9 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField]
     int currentHealth;
 
+    [SerializeField]
+    GameObject deathVFX;
+
     private void Awake()
     {
         currentHealth = startingHealth;
@@ -25,6 +28,7 @@ public class EnemyHealth : MonoBehaviour
     void Die()
     {
         //Temporary
+        Instantiate(deathVFX, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }
