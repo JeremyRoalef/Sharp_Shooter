@@ -20,4 +20,8 @@ public class WeaponSO : ScriptableObject
     public GameObject WeaponPrefab;
     [Tooltip("Enable if the weapon has a zoom in feature")]
     public bool CanZoom = false;
+    [Tooltip("How zoomed in the vertical lens FOV will be when zoomed in")]
+    public float ZoomAmount = 10f;
+    [Tooltip("How fast the player will rotate while zooming")]
+    public float ZoomRotateAmount = 0.2f;
 }
