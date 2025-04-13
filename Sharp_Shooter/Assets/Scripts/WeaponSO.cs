@@ -18,4 +18,6 @@ public class WeaponSO : ScriptableObject
     public bool IsAutomatic = false;
     [Tooltip("The prefab game object of the weapon")]
     public GameObject WeaponPrefab;
+    [Tooltip("Enable if the weapon has a zoom in feature")]
+    public bool CanZoom = false;
 }

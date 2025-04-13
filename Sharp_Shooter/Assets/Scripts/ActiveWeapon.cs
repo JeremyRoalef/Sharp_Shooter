@@ -36,6 +36,7 @@ public class ActiveWeapon : MonoBehaviour
     void Update()
     {
         HandleShoot();
+        HandleZoom();
     }
 
     private void HandleShoot()
@@ -73,5 +74,19 @@ public class ActiveWeapon : MonoBehaviour
         weaponSO = newWeaponSO;
         Weapon newWeapon = Instantiate(weaponSO.WeaponPrefab, transform).GetComponent<Weapon>();
         currentWeapon = newWeapon;
+    }
+
+    void HandleZoom()
+    {
+        if (!weaponSO.CanZoom) { return; }
+
+        if (starterAssetsInputs.zoom)
+        {
+            Debug.Log("Zooming in");
+        }
+        else
+        {
+            Debug.Log("Not zooming in");
+        }
     }
 }
