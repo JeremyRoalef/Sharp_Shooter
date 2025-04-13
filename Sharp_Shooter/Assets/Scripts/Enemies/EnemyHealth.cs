@@ -11,9 +11,16 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField]
     GameObject deathVFX;
 
+    GameManager gameManager;
+
     private void Awake()
     {
         currentHealth = startingHealth;
+    }
+    private void Start()
+    {
+        gameManager = FindFirstObjectByType<GameManager>();
+        gameManager.AdjustEnemiesLeft(1);
     }
 
     public void TakeDamage(int amount)
@@ -29,6 +36,9 @@ public class EnemyHealth : MonoBehaviour
     {
         //Temporary
         Instantiate(deathVFX, transform.position, Quaternion.identity);
+        gameManager.AdjustEnemiesLeft(-1);
+
+
         Destroy(gameObject);
     }
 }
