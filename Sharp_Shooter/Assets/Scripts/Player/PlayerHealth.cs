@@ -1,5 +1,6 @@
 using System;
 using Cinemachine;
+using StarterAssets;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -63,7 +64,8 @@ public class PlayerHealth : MonoBehaviour
         weaponCamera.parent = null;
         deathVirtualCamera.Priority = gameOverVirtualCameraPriority;
         gameOverContainer.SetActive(true);
-
+        StarterAssetsInputs starterAssetsInputs = FindFirstObjectByType<StarterAssetsInputs>();
+        starterAssetsInputs.SetCursorState(false);
 
         Destroy(gameObject);
     }
