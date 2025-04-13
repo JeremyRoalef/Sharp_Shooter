@@ -1,3 +1,4 @@
+using System;
 using StarterAssets;
 using UnityEngine;
 
@@ -59,5 +60,11 @@ public class ActiveWeapon : MonoBehaviour
     void EnableShooting()
     {
         canShoot = true;
+    }
+
+    public void SwitchWeapon(WeaponSO newWeaponSO)
+    {
+        Debug.Log("Picked up " + newWeaponSO);
+        weaponSO = newWeaponSO;
     }
 }
