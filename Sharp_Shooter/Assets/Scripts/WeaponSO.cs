@@ -16,4 +16,6 @@ public class WeaponSO : ScriptableObject
     public GameObject hitVFXPrefab;
     [Tooltip("Enable if the weapon should fire automatically")]
     public bool IsAutomatic = false;
+    [Tooltip("The prefab game object of the weapon")]
+    public GameObject WeaponPrefab;
 }

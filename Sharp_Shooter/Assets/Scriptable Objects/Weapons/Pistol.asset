@@ -17,3 +17,5 @@ MonoBehaviour:
   ReloadTime: 1.25
   FireRate: 0.5
   hitVFXPrefab: {fileID: 6501633108170886200, guid: 1e0ee1a6094d4b946bf4960a3685040e, type: 3}
+  IsAutomatic: 0
+  WeaponPrefab: {fileID: 5596986844265108743, guid: 3778c7601c6c34f458df802503dbe8d6, type: 3}
