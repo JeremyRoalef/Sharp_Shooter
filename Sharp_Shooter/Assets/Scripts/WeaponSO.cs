@@ -14,4 +14,6 @@ public class WeaponSO : ScriptableObject
     public float FireRate = 0.5f;
     [Tooltip("The particles that will play when an object is hit")]
     public GameObject hitVFXPrefab;
+    [Tooltip("Enable if the weapon should fire automatically")]
+    public bool IsAutomatic = false;
 }

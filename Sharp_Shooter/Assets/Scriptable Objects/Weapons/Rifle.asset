@@ -16,7 +16,5 @@ MonoBehaviour:
   MagazineSize: 5
   ReloadTime: 2.5
   FireRate: 1.5
-  maxRayDistance: 0
-  muzzleFlash: {fileID: 0}
-  animator: {fileID: 0}
-  hitVFXPrefab: {fileID: 0}
+  hitVFXPrefab: {fileID: 6501633108170886200, guid: 1e0ee1a6094d4b946bf4960a3685040e, type: 3}
+  IsAutomatic: 0

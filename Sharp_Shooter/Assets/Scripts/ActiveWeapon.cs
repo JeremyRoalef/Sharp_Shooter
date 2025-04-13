@@ -42,13 +42,18 @@ public class ActiveWeapon : MonoBehaviour
         //Conditions to stop
         if (!starterAssetsInputs.shoot) { return; }
         if (!canShoot) { return; }
+
         canShoot = false;
         Invoke("EnableShooting", weaponSO.FireRate);
 
         currentWeapon.Shoot(weaponSO);
         //Play the shoot animation, passing the layer and normalized time (0 for each)
         animator.Play(SHOOT_STRING, 0, 0f);
-        starterAssetsInputs.ShootInput(false);
+
+        if (!weaponSO.IsAutomatic)
+        {
+            starterAssetsInputs.ShootInput(false);
+        }
     }
 
     void EnableShooting()
