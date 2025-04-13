@@ -5,6 +5,10 @@ public class Explosion : MonoBehaviour
     [SerializeField]
     float radius = 1.5f;
 
+    [SerializeField]
+    int damage = 3;
+
+    const string PLAYER_STRING = "Player";
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,5 +30,13 @@ public class Explosion : MonoBehaviour
     void Explode()
     {
         //Do Damage To Player
+        foreach (Collider collider in Physics.OverlapSphere(transform.position, radius))
+        {
+            if (collider.gameObject.CompareTag(PLAYER_STRING))
+            {
+                collider.GetComponent<PlayerHealth>().TakeDamage(damage);
+                break;
+            }
+        }
     }
 }
