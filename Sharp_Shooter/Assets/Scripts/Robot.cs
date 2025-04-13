@@ -6,7 +6,7 @@ public class Robot : MonoBehaviour
     NavMeshAgent agent;
     CharacterController player;
 
-
+    const string PLAYER_STRING = "Player";
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,5 +18,13 @@ public class Robot : MonoBehaviour
     void Update()
     {
         agent.SetDestination(player.transform.position);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag(PLAYER_STRING))
+        {
+            GetComponent<EnemyHealth>().Die();
+        }
     }
 }

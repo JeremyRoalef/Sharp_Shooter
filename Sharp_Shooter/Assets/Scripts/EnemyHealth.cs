@@ -25,7 +25,7 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    void Die()
+    public void Die()
     {
         //Temporary
         Instantiate(deathVFX, transform.position, Quaternion.identity);
