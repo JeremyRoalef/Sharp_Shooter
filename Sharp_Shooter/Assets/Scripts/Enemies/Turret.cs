@@ -15,6 +15,11 @@ public class Turret : MonoBehaviour
     [SerializeField]
     float fireRate = 0.5f;
 
+    [SerializeField]
+    int damageAmount;
+
+    [SerializeField]
+    float projectileVelocity;
 
     Transform playerTargetPoint;
     GameObject player;
@@ -43,7 +48,11 @@ public class Turret : MonoBehaviour
             GameObject newProjectile = Instantiate(
                 projectilePrefab, 
                 turretProjectileSpawnPoint.position, 
-                turretHead.rotation);
+                Quaternion.identity);
+            if (playerTargetPoint != null)
+                newProjectile.transform.LookAt(playerTargetPoint.transform.position);
+
+            newProjectile.GetComponent<Projectile>()?.InitializeProjectile(projectileVelocity, damageAmount);
 
             yield return new WaitForSeconds(fireRate);
         }
