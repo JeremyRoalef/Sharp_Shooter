@@ -1,0 +1,58 @@
+using StarterAssets;
+using UnityEngine;
+
+public class ActiveWeapon : MonoBehaviour
+{
+    [SerializeField]
+    WeaponSO weaponSO;
+
+    StarterAssetsInputs starterAssetsInputs;
+
+    [SerializeField]
+    float maxRayDistance;
+
+    Animator animator;
+
+    Weapon currentWeapon;
+    const string SHOOT_STRING = "Shoot";
+
+    bool canShoot = true;
+
+    private void Awake()
+    {
+        starterAssetsInputs = GetComponentInParent<StarterAssetsInputs>();
+        animator = GetComponent<Animator>();
+    }
+
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        currentWeapon = GetComponentInChildren<Weapon>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        HandleShoot();
+    }
+
+    private void HandleShoot()
+    {
+        //Conditions to stop
+        if (!starterAssetsInputs.shoot) { return; }
+        if (!canShoot) { return; }
+        canShoot = false;
+        Invoke("EnableShooting", weaponSO.FireRate);
+
+        currentWeapon.Shoot(weaponSO);
+        //Play the shoot animation, passing the layer and normalized time (0 for each)
+        animator.Play(SHOOT_STRING, 0, 0f);
+        starterAssetsInputs.ShootInput(false);
+    }
+
+    void EnableShooting()
+    {
+        canShoot = true;
+    }
+}

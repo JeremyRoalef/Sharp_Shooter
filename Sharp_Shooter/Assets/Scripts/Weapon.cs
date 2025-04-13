@@ -1,55 +1,16 @@
-using StarterAssets;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
     [SerializeField]
-    WeaponSO weaponSO;
-
-    StarterAssetsInputs starterAssetsInputs;
-
-    [SerializeField]
-    float maxRayDistance;
-
-    [SerializeField]
     ParticleSystem muzzleFlash;
-
-    [SerializeField]
-    Animator animator;
-
-    [SerializeField]
-    GameObject hitVFXPrefab;
 
     //RaycastHit interacts with rigidbodys and colliders
     RaycastHit hit;
-    const string SHOOT_STRING = "Shoot";
 
-    private void Awake()
+    public void Shoot(WeaponSO weaponSO)
     {
-        starterAssetsInputs = GetComponentInParent<StarterAssetsInputs>();
-    }
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        HandleShoot();
-    }
-
-    private void HandleShoot()
-    {
-        //Conditions to stop
-        if (!starterAssetsInputs.shoot) { return; }
-
         muzzleFlash.Play();
-        //Play the shoot animation, passing the layer and normalized time (0 for each)
-        animator.Play(SHOOT_STRING, 0, 0f);
 
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
         {
@@ -59,8 +20,7 @@ public class Weapon : MonoBehaviour
             EnemyHealth enemyHealth = hit.transform.GetComponent<EnemyHealth>();
             enemyHealth?.TakeDamage(weaponSO.Damage); //Enemy health null? (same as below)
 
-
-            GameObject hitVFX = Instantiate(hitVFXPrefab, hit.point, Quaternion.identity); //hit.point will return the location the ray hit the collider 
+            GameObject hitVFX = Instantiate(weaponSO.hitVFXPrefab, hit.point, Quaternion.identity); //hit.point will return the location the ray hit the collider 
 
             /*
             if (hit.transform.TryGetComponent<EnemyHealth>(out EnemyHealth enemyHealth))
@@ -70,7 +30,5 @@ public class Weapon : MonoBehaviour
             }
             */
         }
-
-        starterAssetsInputs.ShootInput(false);
     }
 }

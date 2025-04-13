@@ -12,18 +12,6 @@ public class WeaponSO : ScriptableObject
     public float ReloadTime = 1f;
     [Tooltip("The delay (in seconds) between each shot fired")]
     public float FireRate = 0.5f;
-
-
-
-    [SerializeField]
-    float maxRayDistance;
-
-    [SerializeField]
-    ParticleSystem muzzleFlash;
-
-    [SerializeField]
-    Animator animator;
-
-    [SerializeField]
-    GameObject hitVFXPrefab;
+    [Tooltip("The particles that will play when an object is hit")]
+    public GameObject hitVFXPrefab;
 }
